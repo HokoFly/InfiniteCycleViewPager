@@ -17,10 +17,8 @@ import android.view.animation.Interpolator;
 
 import java.lang.reflect.Field;
 
-import static android.support.v4.view.ViewPager.GONE;
 import static android.support.v4.view.ViewPager.OnPageChangeListener;
 import static android.support.v4.view.ViewPager.PageTransformer;
-import static android.support.v4.view.ViewPager.VISIBLE;
 import static android.view.View.OVER_SCROLL_NEVER;
 import static com.gigamole.infinitecycleviewpager.InfiniteCyclePagerAdapter.OnNotifyDataSetChangedListener;
 
@@ -514,14 +512,15 @@ class InfiniteCycleManager implements OnNotifyDataSetChangedListener {
 
             // Handle page layer and bounds visibility
             enableHardwareLayer(page);
-            if (mItemCount == MIN_CYCLE_COUNT) {
-                if (position > 2.0F || position < -2.0F ||
-                        (mStackCount != 0 && position > 1.0F) ||
-                        (mStackCount != 0 && position < -1.0F)) {
-                    page.setVisibility(GONE);
-                    return;
-                } else page.setVisibility(VISIBLE);
-            }
+            // bugfix: Comment the area to fix page disappearance when fast scroll
+//            if (mItemCount == MIN_CYCLE_COUNT) {
+//                if (position > 2.0F || position < -2.0F ||
+//                        (mStackCount != 0 && position > 1.0F) ||
+//                        (mStackCount != 0 && position < -1.0F)) {
+//                    page.setVisibility(GONE);
+//                    return;
+//                } else page.setVisibility(VISIBLE);
+//            }
 
             final float pageSize = mIsVertical ? page.getMeasuredHeight() : page.getMeasuredWidth();
 
